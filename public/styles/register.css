@@ -59,7 +59,7 @@ form.login input[type="text"], form.login input[type="password"]
   outline: none !important;
 }
 
-#reg-btn{
+#login-btn{
   margin-top: -1rem;
   background: #fff;
   border: solid .1rem #228cb5;

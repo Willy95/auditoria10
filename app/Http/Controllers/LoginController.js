@@ -1,5 +1,7 @@
 'use strict'
 
+const Hash = use('Hash')
+
 class LoginController {
 
   * login(req, res){
@@ -7,7 +9,8 @@ class LoginController {
 
     return res.send({
       'status': 200,
-      'data': data
+      'data': data,
+      'pass': yield Hash.make(data.password)
     })
   }
 

@@ -4,12 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-    <title>Inicio</title>
-
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700,900' rel='stylesheet' type='text/css'>
     <link rel="icon" href="/assets/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="/styles/welcome.css">
+    <link rel="stylesheet" type="text/css" href="/styles/register.css">
+    <title>Register</title>
   </head>
   <body>
     <div class="container">
@@ -17,32 +15,19 @@
         <div class="col-md-12">
           <div class="wrap login-box">
             <p class="form-title">
-              Iniciar Sesión
+              Regístro
             </p>
             <form class="login">
               <input type="text" placeholder="E-mail" id="username"/>
+              <input type="text" placeholder="Nombre Completo" id="fullname"/>
               <input type="password" placeholder="Contraseña" id="password"/>
-              <button type="button" class="btn btn-success btn-sm" id="login-btn">
-                Entrar
-              </button>
+              <input type="password" placeholder="Confirmar Contraseña" id="cpassword"/>
               <button type="button" class="btn btn-success btn-sm" id="reg-btn">
-                Resgistrarme
+                Aceptar
               </button>
-              {# <div class="remember-forgot">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"/>
-                        Remember Me
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <a href="#" class="">Forgot Password</a>
-                  </div>
-                </div>
-              </div> #}
+              <button type="button" class="btn btn-success btn-sm" id="login-btn" >
+                Iniciar Sesión
+              </button>
             </form>
           </div>
         </div>
@@ -51,5 +36,5 @@
   </body>
 
   <script src="/libs/jQuery/jquery-2.2.3.min.js" charset="utf-8"></script>
-  <script src="/scripts/login.js" charset="utf-8"></script>
+  <script src="/scripts/register.js" charset="utf-8"></script>
 </html>

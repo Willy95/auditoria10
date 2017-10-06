@@ -19,14 +19,17 @@ $("#login-btn").click(function(e){
   })
   .done(function(res){
     if (res.status == 200){
-
+      window.location.href='/dashboard'
+    }
+    if (res.status == 401) {
+      alert('Tus credenciales son incorrectas')
+    }
+    if (res.status ==404) {
+      alert('El usuario no existe')
     }
     console.log("Exito", res);
   })
   .fail(function(err){
     console.log("Error", err);
-  })
-  .always(function(e){
-    alert('Petición finalizada');
   });
 });

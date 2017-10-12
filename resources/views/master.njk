@@ -2,54 +2,73 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
     <title>Inicio</title>
-
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700,900' rel='stylesheet' type='text/css'>
-    <link rel="icon" href="/assets/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Raleway:500' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="/styles/welcome.css">
   </head>
   <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="wrap login-box">
-            <p class="form-title">
-              Iniciar Sesión
-            </p>
-            <form class="login">
-              <input type="text" placeholder="E-mail" id="username"/>
-              <input type="password" placeholder="Contraseña" id="password"/>
-              <button type="button" class="btn btn-success btn-sm" id="login-btn">
-                Entrar
-              </button>
-              <button type="button" class="btn btn-success btn-sm" id="reg-btn">
-                Resgistrarme
-              </button>
-              {# <div class="remember-forgot">
+    <div class="mediahoja">
+      <div class="page-header">
+        <h1 class="logo">SuperNova <small>Bienvenido a nuestro Mundo!</small></h1>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">
+                Iniciar Sesion</h3>
+              </div>
+              <div class="panel-body">
                 <div class="row">
-                  <div class="col-md-6">
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"/>
-                        Remember Me
-                      </label>
+                  <div class="col-xs-6 col-sm-6 col-md-6 separator social-login-box"> <br />
+                    <a href="#" class="btn facebook btn-block" role="button">Login usando Facebook</a>
+                    <br />
+                    <a href="#" class="btn twitter btn-block" role="button">Login usando Twitter</a>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6 login-box">
+                    <form role="form">
+                      <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                        <input id="username" type="text" class="form-control" placeholder="Username" required autofocus />
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                        <input id="password" type="password" class="form-control" placeholder="Password" required />
+                      </div>
+                      <p>
+                        <a href="#">No recuerdo Password?</a></p>
+                        Sin cuenta? <a href="#">Registrate Aqui!</a>
+                      </form>
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <a href="#" class="">Forgot Password</a>
+                </div>
+                <div class="panel-footer">
+                  <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" value="Remember">
+                          Recordarme
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                      <button type="button" class="btn btn-labeled btn-success" id="login-btn">
+                      <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>Entrar</button>
+                      <button type="button" class="btn btn-labeled btn-danger">
+                      <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>Cancelar</button>
+                    </div>
                   </div>
                 </div>
-              </div> #}
-            </form>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </body>
-
-  <script src="/libs/jQuery/jquery-2.2.3.min.js" charset="utf-8"></script>
-  <script src="/scripts/login.js" charset="utf-8"></script>
-</html>
+    </body>
+    <script type="text/javascript" src="/libs/jQuery/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="/scripts/login.js"></script>
+  </html>

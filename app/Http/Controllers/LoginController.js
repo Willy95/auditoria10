@@ -10,7 +10,7 @@ class LoginController {
     try {
 
       var data = req.all()
-      let usuario = yield Database.from('users').where({'status':1, 'email':data.username})
+      let usuario = yield Database.from('users').where({'status':1, 'username':data.username})
       if (usuario.length>0) {
         var login = yield req.auth.attempt(data.username,data.password)
         if (login) {

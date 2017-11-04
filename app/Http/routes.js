@@ -18,12 +18,13 @@
 const Route = use('Route')
 
 Route.on('/').render('welcome')
-Route.on('/reg').render('register')
+Route.on('/register').render('register')
 Route.on('/dashboard').render('templates.dashboard')
-Route.on('/example').render('example')
+// Route.on('/example').render('example')
 Route.on('/empresas').render('empresas')
 
 //Route.on('/dashboard').render('templates.opciones') ejercico de ruta
 
 Route.post('/login', 'LoginController.login')
 Route.get('/logout', 'LoginController.logout')
+Route.post('/reg', 'LoginController.reg')

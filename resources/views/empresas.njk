@@ -1,0 +1,66 @@
+{% extends "templates.dashboard" %}
+{% block title %}
+  Formulario de Empresas
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-xs-12">
+  <div>
+    <table id="empresas">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Logo</th>
+          <th>RFC</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+    <div class="">
+      <form role="form" class="form-horizontal">
+        <div class="form-group">
+          <label class="col-md-2 control-label">Nombre de Empresa</label>
+          <div class="col-md-10">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-envelope-o"></i>
+              </span>
+              <input type="text" class="form-control1" id="business" placeholder="TU EMPRESA S.A. de C.V.">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">RFC</label>
+          <div class="col-md-10">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-key"></i>
+              </span>
+              <input type="text" class="form-control1" id="folio" placeholder="TIFM141062J76">
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="form-group">
+          <label class="col-md-2 control-label">Logo</label>
+          <div class="col-md-10">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-key"></i>
+              </span>
+              <form id="image"><input type="file" class="form-control1" id="logo" name="logo"></form>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6"></div>
+  <div class="col-md-3"> <button class="btn-default btn btn-block">Cancelar</button></div>
+  <div class="col-md-3"><button class="btn-primary btn btn-block" id="save">Guardar Información</button></div>
+</div>
+{% endblock %}

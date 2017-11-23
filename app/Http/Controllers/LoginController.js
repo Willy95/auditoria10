@@ -10,7 +10,7 @@ class LoginController {
     try {
 
       var data = req.all()
-      let usuario = yield Database.from('users').where({'status':1, 'email':data.username})
+      let usuario = yield Database.from('users').where({'active':1, 'username':data.username})
       if (usuario.length>0) {
         var login = yield req.auth.attempt(data.username,data.password)
         if (login) {
@@ -44,6 +44,28 @@ class LoginController {
   *logout(req,res){
     yield req.auth.logout()
     return res.redirect('/')
+  }
+
+  *reg(req, res){
+    var data = req.all()
+    var query = yield Database.from('users').where({'username':data.username})
+    if (query.length > 0){
+      return res.send({
+      'status':1001
+    })
+    }
+    else{
+      var user = new User()
+      user.username = data.username
+      user.password = yield Hash.make(data.password)
+      user.token = yield Hash.make(data.username)
+      user.role = 'Administer'
+      yield user.save()
+      return res.send({
+        'status':200
+    })
+
+    }
   }
 
 }

@@ -23,6 +23,7 @@ $("#login-btn").click(function(e){
     }
     if (res.status == 401) {
       alert('Tus credenciales son incorrectas')
+      console.log(res)
     }
     if (res.status ==404) {
       alert('El usuario no existe')

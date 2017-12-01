@@ -14,6 +14,7 @@ $("#reg-btn").click(function(e){
   let values = getValues();
   if (values.password != values.cpassword) {
     alert ("Contraseñas no coinciden")
+    window.location.href='/master'
   }
   else{
     $.ajax({

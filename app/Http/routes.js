@@ -36,3 +36,8 @@ Route.post('/savebusiness', 'BusinessController.save')
 Route.post('/getAllBusiness', 'BusinessController.getAllBusiness')
 Route.post('/updateBusiness', 'BusinessController.update')
 Route.post('/inactivebusiness', 'BusinessController.inactive')
+
+Route.post('/saveauditoria', 'auditoriaController.save')
+Route.post('/getAllAuditoria', 'auditoriaController.getAllAuditoria')
+Route.post('/updateaudits', 'auditoriaController.update')
+Route.post('/inactiveaudits', 'auditoriaController.inactive')

@@ -2,13 +2,13 @@
 
 const Lucid = use('Lucid')
 
-class Business extends Lucid {
+class Departamento extends Lucid {
 
   // Le especificamos la tabla a la que se va a conectar
   static get table(){
-    return 'business'
+    return 'departments'
   }
 
 }
 
-module.exports = Business
+module.exports = Departamento

@@ -2,10 +2,12 @@
 
 function getValues(){
   // Obtenemos los tres valores que nos importan
-  const nombre  = $("#business").val();
+  const nombre  = $("#Departamento").val();
+  const descripcion  = $("#Descripcion").val();
   var datos ={
     id: '',
-    nombre:nombre
+    nombre:nombre,
+    descripcion:descripcion
   }
   return datos;
 }
@@ -30,19 +32,19 @@ $("#save").click(function(e){
       // empresa que deseamos actualizar
       // ** EL ID LO TENEMOS EN EL ATRIBUTO DATA LLAMADO "business" QUE
       // AGREGAM0OS AL MOMENTO DE DAR CLICK EN EL BOTON DE ACTUALIZAR **
-      values.id = $btn.data('audits');
+      values.id = $btn.data('departments');
       $.ajax({
-          url: '/updateaudits',
+          url: '/updatedepartamento',
           type: 'POST',
           data: values
         })
         .done(function(res){
           if (res.status == 200){
-            alert("Empresa actualizada correctamente");
+            alert("Departamento actualizado correctamente");
             window.location.reload();
           }
           else if (res.status == 1001) {
-            alert('Ya existe una Auditoria registrada con el mismo nombre');
+            alert('Ya existe un Departamento registrado con el mismo nombre');
           }
           else {
             alert("Algo ha salido mal");
@@ -66,17 +68,17 @@ $("#save").click(function(e){
       // Verificamos que exista una imagen ya que es registro y ésta es
       // necesaria para completar el registro
       $.ajax({
-          url: '/saveauditoria',
+          url: '/savedepartamento',
           type: 'POST',
           data: values
         })
         .done(function(res){
           if (res.status == 200){
-            alert("Auditoria registrada correctamente");
+            alert("Departamento registrado correctamente");
             window.location.reload();
           }
           else if (res.status == 1001) {
-            alert('Ya existe una Auditoria registrada con el mismo nombre');
+            alert('Ya existe un Departamento registrado con el mismo nombre');
           }
           else {
             alert("Algo ha salido mal");
@@ -109,7 +111,7 @@ $("#save").click(function(e){
 // ya tenemos registradas
 function consultingData(){
   $.ajax({
-    url: '/getAllAuditoria', // No olvidar crear la ruta en ROUTES.JS
+    url: '/getAllDepartamento', // No olvidar crear la ruta en ROUTES.JS
     type: 'POST'
   })
   .done(function(res) {
@@ -118,7 +120,7 @@ function consultingData(){
       $("#empresasTable tbody").append(`
         <tr>
           <td>${el.name}</td>
-          <td>${el.codigo}</td>
+          <td>${el.description}</td>
           <td>
             <button type="button" class="btn btn-primary btnUpd" data-obj='${JSON.stringify(el)}'>Actualizar</button>
             <button type="button" class="btn btn-danger btnDel" data-obj='${JSON.stringify(el)}'>Eliminar</button>
@@ -153,7 +155,7 @@ $("body").on('click', '.btnUpd', function(event) {
     $("#save").data('accion', 'actualizar');
     // Guardamos en un atributo, el id de la empresa para saber cual es la
     // que vamos a actualizar
-    $("#save").data('audits', obj.id);
+    $("#save").data('departments', obj.id);
     $("#sectionData").fadeIn('slow');
   });
 });
@@ -171,13 +173,13 @@ $("body").on('click', '.btnDel', function(event) {
   // ** SE DEBE DE PREGUNTAR SI ESTA SEGURO DE Eliminar
   //    PERO POR LAS PRISAS LO HAREMOS DE MANERA DIRECTA **
   $.ajax({
-    url: '/inactiveaudits',
+    url: '/inactivedepartamento',
     type: 'POST',
     data: { id : obj.id }
   })
   .done(function(res){
     if (res.status == 200){
-      alert("Auditoria eliminada correctamente");
+      alert("Departamento eliminada correctamente");
       window.location.reload();
     }
     else {

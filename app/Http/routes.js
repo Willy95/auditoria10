@@ -22,7 +22,7 @@ Route.on('/dashboard').render('templates.dashboard')
 Route.on('/register').render('register')
 Route.on('/empresas').render('empresas')
 Route.on('/auditor').render('auditor')
-Route.on('/departamento').render('departamento')
+Route.on('/departamentos').render('departamentos')
 
 
 //Route.on('/dashboard').render('templates.opciones') ejercico de ruta
@@ -41,3 +41,8 @@ Route.post('/saveauditoria', 'auditoriaController.save')
 Route.post('/getAllAuditoria', 'auditoriaController.getAllAuditoria')
 Route.post('/updateaudits', 'auditoriaController.update')
 Route.post('/inactiveaudits', 'auditoriaController.inactive')
+
+Route.post('/savedepartamento', 'departamentoController.save')
+Route.post('/getAllDepartamento', 'departamentoController.getAllDepartamento')
+Route.post('/updatedepartments', 'departamentoController.update')
+Route.post('/inactivedepartments', 'departamentoController.inactive')

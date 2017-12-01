@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block title %}
-  Formulario de Empresas
+  Formulario de Departamento
 {% endblock %}
 
 {% block content %}
@@ -24,8 +24,7 @@
         <thead>
           <tr>
             <th>Nombre</th>
-            <th>RFC</th>
-            <th>Acciones</th>
+            <th>Descripcion</th>
           </tr>
         </thead>
         <tbody></tbody>
@@ -40,44 +39,27 @@
     <div class="">
       <form role="form" class="form-horizontal">
         <div class="form-group">
-          <label class="col-md-2 control-label">Nombre de Empresa</label>
+          <label class="col-md-2 control-label">Nombre del Departamento</label>
           <div class="col-md-10">
             <div class="input-group">
               <span class="input-group-addon">
                 <i class="fa fa-envelope-o"></i>
               </span>
-              <input type="text" class="form-control1" id="business" placeholder="TU EMPRESA S.A. de C.V.">
+              <input type="text" class="form-control1" id="Departamento" placeholder="Departamento">
             </div>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-md-2 control-label">RFC</label>
+          <label class="col-md-2 control-label">Descripcion</label>
           <div class="col-md-10">
             <div class="input-group">
               <span class="input-group-addon">
                 <i class="fa fa-key"></i>
               </span>
-              <input type="text" class="form-control1" id="folio" placeholder="TIFM141062J76">
+              <input type="text" class="form-control1" id="Descripcion" placeholder="Descripcion">
             </div>
           </div>
         </div>
-        <div class="form-group">
-          <label class="col-md-2 control-label">Logo</label>
-            <div class="col-md-10">
-              <div class="input-group">
-                <span class="input-group-addon" id="btnFile">
-                  <i class="fa fa-folder"></i>&nbsp;
-                  Abrir Archivos
-                </span>
-                <form>
-                  <input type="text" class="form-control1" id="logoInp" name="logoInp" readonly>
-                </form>
-              </div>
-            </div>
-          </div>
-      </form>
-      <form hidden="hidden" id="logoForm">
-        <input type="file" class="form-control1" id="logo" name="logo">
       </form>
     </div>
   </div>
@@ -90,5 +72,5 @@
 {% block js %}
 <script src="/libs/bootstrap-table/bootstrap-table.min.js" charset="utf-8"></script>
 <script src="/libs/bootstrap-table/locale/bootstrap-table-es-MX.js" charset="utf-8"></script>
-  <script type="text/javascript" src="/scripts/empresa.js"></script>
+  <script type="text/javascript" src="/scripts/departamento.js"></script>
 {% endblock %}

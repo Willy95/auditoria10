@@ -22,8 +22,8 @@ Route.on('/dashboard').render('templates.dashboard')
 Route.on('/register').render('register')
 Route.on('/empresas').render('empresas')
 Route.on('/auditor').render('auditor')
+Route.on('/auditoria').render('auditoria')
 Route.on('/departamento').render('departamento')
-
 
 //Route.on('/dashboard').render('templates.opciones') ejercico de ruta
 
@@ -37,9 +37,18 @@ Route.post('/savebusiness', 'BusinessController.save')
 Route.post('/getAllBusiness', 'BusinessController.getAllBusiness')
 Route.post('/updateBusiness', 'BusinessController.update')
 Route.post('/inactivebusiness', 'BusinessController.inactive')
+
+// Rutas Auditor 
+
 Route.post('/updateAuditor', 'AuditorController.update')
 Route.post('/getAllAuditor', 'AuditorController.getAllAuditor')
 Route.post('/inactiveAuditor', 'AuditorController.inactive')
 Route.post('/savedepartamento', 'DepartmentController.save')
 Route.post('/getAllDepartment', 'DepartmentController.getAllDepartment')
+
+// Rutas Auditoria 
+Route.post('/saveauditoria', 'auditoriaController.save')
+Route.post('/getAllAuditoria', 'auditoriaController.getAllAuditoria')
+Route.post('/updateaudits', 'auditoriaController.update')
+Route.post('/inactiveaudits', 'auditoriaController.inactive')
 

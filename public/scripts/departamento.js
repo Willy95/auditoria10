@@ -148,8 +148,8 @@ $("body").on('click', '.btnUpd', function(event) {
   $("#sectionTable").fadeOut('slow', function(){
     // Insertamos la información en los inputs
     $("#business").val(obj.name);
-    
-   
+
+
     // Le asignamos un atributo al boton guardar para que nos haga la funcionalidad
     // de guardar, y poder reutilizarlo
     $("#save").data('accion', 'actualizar');

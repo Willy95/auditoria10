@@ -2,12 +2,17 @@
 
 function getValues(){
   // Obtenemos los tres valores que nos importan
-  const nombre  = $("#Departamento").val();
-  const descripcion  = $("#Descripcion").val();
+  const nombre  = $("#departamento").val();
+  const aka  = $("#aka").val();
+  const description  = $("#descripcion").val();
+  const auditor  = $("#auditor").val();
   var datos ={
     id: '',
+    business: '',
     nombre:nombre,
-    descripcion:descripcion
+    aka:aka,
+    description:description,
+    auditor:auditor
   }
   return datos;
 }
@@ -65,6 +70,7 @@ $("#save").click(function(e){
     // Verificamos que tengamos todos los valores necesarios
     // de ser así, proseguimos a enviar la peticion al servidor
     if (values != null){
+      values.business = $btn.data('business');
       // Verificamos que exista una imagen ya que es registro y ésta es
       // necesaria para completar el registro
       $.ajax({
@@ -117,7 +123,7 @@ function consultingData(){
   .done(function(res) {
     // Recorremos la respuesta, y por cada elemto, lo agregamos a la tabla
     $.each(res, function(index, el) {
-      $("#empresasTable tbody").append(`
+      $("#departamentoTable tbody").append(`
         <tr>
           <td>${el.name}</td>
           <td>${el.description}</td>
@@ -129,7 +135,7 @@ function consultingData(){
       `);
     });
     // Inicializamos la tabla ya con los valores agregados
-    $('#empresasTable').bootstrapTable();
+    $('#departamentoTable').bootstrapTable();
   })
   .fail(function(err) {
     alert("Algo ha salido mal al obtener la Auditoria");

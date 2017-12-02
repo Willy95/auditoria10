@@ -19,6 +19,7 @@
         <thead>
           <tr>
             <th>Nombre</th>
+            <th>AKA</th>
             <th>Empresa</th>
             <th>Auditor</th>
             <th>Descripcion</th>
@@ -44,6 +45,17 @@
                 <i class="fa fa-envelope-o"></i>
               </span>
               <input type="text" class="form-control1" id="departamento" placeholder="VENTAS">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">AKA</label>
+          <div class="col-md-10">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-envelope-o"></i>
+              </span>
+              <input type="text" class="form-control1" id="aka" placeholder="AKA">
             </div>
           </div>
         </div>
@@ -82,5 +94,5 @@
 {% block js %}
 <script src="/libs/bootstrap-table/bootstrap-table.min.js" charset="utf-8"></script>
 <script src="/libs/bootstrap-table/locale/bootstrap-table-es-MX.js" charset="utf-8"></script>
-<script type="text/javascript" src="/scripts/empresa.js"></script>
+<script type="text/javascript" src="/scripts/departamento.js"></script>
 {% endblock %}

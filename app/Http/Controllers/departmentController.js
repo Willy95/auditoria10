@@ -11,12 +11,11 @@ const Database = use('Database')
 // Nos ayuda a acceder a los directorios del sistema
 const Helpers = use('Helpers')
 
-class departmentController {
+class DepartmentController {
 
   * renderView(req, res){
     const id = req.param('id')
     const audit = yield Database.from('users').where({'role':'auditor', 'active':1})
-    console.log(audit)
     return yield res.sendView('departamento', { audits: audit, business: id })
 
   }
@@ -30,9 +29,12 @@ class departmentController {
       // ** Se ingresan cada uno de los atributos que tengamos en la base de datos **
       var department    = new Department()
       department.name   = data.nombre
-      department.username  = data.user_id
+      department.aka = data.aka
+      department.description = data.description
+      department.user_id  = data.auditor
+      department.business_id = data.business
       department.active = 1
-      yield business.save()
+      yield department.save()
       // regresamos un estatus 200, lo que nos indica que todo se ha completado
       // de manera exitos (Puede ser cualquier estatus que se desee, siempre
       // y cuando sepamos que significa para nosotros, "Yo utilizo estos por
@@ -95,4 +97,4 @@ class departmentController {
     return res.send({ status  : 200 })
   }
 }
-module.exports = departmentController
+module.exports = DepartmentController

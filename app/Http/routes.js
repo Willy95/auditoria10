@@ -30,7 +30,7 @@ Route.on('/departamento').render('departamento')
 Route.post('/login', 'LoginController.login')
 Route.get('/logout', 'LoginController.logout')
 Route.post('/reg', 'LoginController.reg')
-Route.get('/department/:id', 'departmentController.renderView')
+Route.get('/department/:id', 'DepartmentController.renderView')
 
 // Rutas especificas para la gestion de las empresas
 Route.post('/savebusiness', 'BusinessController.save')
@@ -40,3 +40,4 @@ Route.post('/inactivebusiness', 'BusinessController.inactive')
 Route.post('/updateAuditor', 'AuditorController.update')
 Route.post('/getAllAuditor', 'AuditorController.getAllAuditor')
 Route.post('/inactiveAuditor', 'AuditorController.inactive')
+Route.post('/savedepartamento', 'DepartmentController.save')

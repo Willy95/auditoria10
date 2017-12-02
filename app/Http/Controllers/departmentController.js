@@ -35,6 +35,10 @@ class DepartmentController {
       department.business_id = data.business
       department.active = 1
       yield department.save()
+      return res.send({
+        status  : 200,
+        data    : department
+      })
       // regresamos un estatus 200, lo que nos indica que todo se ha completado
       // de manera exitos (Puede ser cualquier estatus que se desee, siempre
       // y cuando sepamos que significa para nosotros, "Yo utilizo estos por
@@ -44,9 +48,14 @@ class DepartmentController {
 
 * getAllDepartment (req, res){
   // Hacemos la consulta de todas las empresas que se encuentren activas
-  const id = req.param('id')
-  const departments = yield Database.from('departments').where({
-    'bunsiness_id': id
+  const data = req.all()
+  const departments = yield Database.from('departments')
+  .innerJoin('users', 'departments.user_id', 'users.id')
+  .innerJoin('business', 'departments.business_id', 'business.id')
+  .select('departments.*', 'users.username as user', 'business.name as business')
+  .where({
+    'business_id': data.id,
+    'departments.active': 1
   })
   return res.send(departments)
 

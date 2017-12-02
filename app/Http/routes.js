@@ -41,3 +41,5 @@ Route.post('/updateAuditor', 'AuditorController.update')
 Route.post('/getAllAuditor', 'AuditorController.getAllAuditor')
 Route.post('/inactiveAuditor', 'AuditorController.inactive')
 Route.post('/savedepartamento', 'DepartmentController.save')
+Route.post('/getAllDepartment', 'DepartmentController.getAllDepartment')
+

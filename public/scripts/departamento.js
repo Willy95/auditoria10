@@ -117,16 +117,19 @@ $("#save").click(function(e){
 // ya tenemos registradas
 function consultingData(){
   $.ajax({
-    url: '/getAllDepartamento', // No olvidar crear la ruta en ROUTES.JS
-    type: 'POST'
-  })
+    url: '/getAllDepartment', // No olvidar crear la ruta en ROUTES.JS
+    type: 'POST',
+    data: {id: $('#save').data('business')}
+    })
   .done(function(res) {
     // Recorremos la respuesta, y por cada elemto, lo agregamos a la tabla
     $.each(res, function(index, el) {
       $("#departamentoTable tbody").append(`
         <tr>
           <td>${el.name}</td>
-          <td>${el.description}</td>
+          <td>${el.aka}</td>
+          <td>${el.business}</td>
+          <td>${el.user}</td>
           <td>
             <button type="button" class="btn btn-primary btnUpd" data-obj='${JSON.stringify(el)}'>Actualizar</button>
             <button type="button" class="btn btn-danger btnDel" data-obj='${JSON.stringify(el)}'>Eliminar</button>

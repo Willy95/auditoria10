@@ -4,94 +4,74 @@
 // Encriptado
 const Hash = use('Hash')
 // Bussiness - Base de datos
-const Auditoria = use('App/Model/Auditoria')
+const Department = use('App/Model/Department')
+const Auditor = use('App/Model/Auditor')
 // Acceder a la base de datos
 const Database = use('Database')
 // Nos ayuda a acceder a los directorios del sistema
 const Helpers = use('Helpers')
 
-class auditoriaController {
+class departmentController {
 
+  * renderView(req, res){
+    const id = req.param('id')
+    const audit = yield Database.from('users').where({'role':'auditor', 'active':1})
+    console.log(audit)
+    return yield res.sendView('departamento', { audits: audit, business: id })
+
+  }
   * save (req, res){
     // Obteneos todos los datos que enviamos en el AJAX
     var data = req.all()
-    // Revisamos si existe ya una epresa con el folio que estamos enviando
-    var query = yield Database.from('audits').where({'name':data.nombre})
+    // Obtenemos la imagen, de esta manera ya que es un archivo y no
+    // solo es texto como la Información anterior
     // En caso de que la empresa exista, regresamos un estatus que nos indique
     // que ya existe y obvio ya no se registra esta empresa
+      // ** Se ingresan cada uno de los atributos que tengamos en la base de datos **
+      var department    = new Department()
+      department.name   = data.nombre
+      department.username  = data.user_id
+      department.active = 1
+      yield business.save()
+      // regresamos un estatus 200, lo que nos indica que todo se ha completado
+      // de manera exitos (Puede ser cualquier estatus que se desee, siempre
+      // y cuando sepamos que significa para nosotros, "Yo utilizo estos por
+      // estandar universal"), y ademas enviamos la información de la empresa que
+      // acabamos de registrar.
+    }
+
+* getAllDepartment (req, res){
+  // Hacemos la consulta de todas las empresas que se encuentren activas
+  const id = req.param('id')
+  const departments = yield Database.from('departments').where({
+    'bunsiness_id': id
+  })
+  return res.send(departments)
+
+  }
+  * update (req, res){
+    // Obteneos todos los datos que enviamos en el AJAX
+    const data = req.all()
+    // Revisamos si existe ya una epresa con el folio que estamos enviando
+    const query = yield Database.from('departments').where({'business_id': data.id})
+    // En caso de que la empresa exista, regresamos un estatus que nos indique
+    // que ya existe y obvio ya no se registra esta empresa
+    // EN ESTE CASO VAMOS A COMPARAR QUE EL FOLIO SEA DIFERENTE AL QUE YA TIENE
+    // LA EMPRESA QUE VAMOS A ACTUALIZAR
+    const toUpdate = yield Database.from('departments').where({'business_id': data.id})
     if (query.length > 0){
       return res.send({
         'status':1001
       })
     }
     else{
-      // Llegamos a esta parte en caso de que la empresa no exista según el
-      // folio que se ha ingresado
-
-      // Generaos un nombre random para la imagen y le concatenamos
-      // la extension del archivo al final
-      const timestamp = new Date();
-      const codigo = Math.floor((Math.random() * 999999999999999999) + 1) + timestamp.getTime()
-      // Le especificamos directamente la ruta donde se guardará la imagen
-      // Por defecto de esta manera inicia desde PUBLIC
-      // Y se guardará con el nombre random que acabamos de generar
-  
-      // Generamos una INSTANCIA de Company para crear una nueva Bussines en
-      // la base de datos. COMPANY SE DECLARA EN LA PARTE DE ARRIBA DE
-      // ESTE ARCHIVO
-      // ** Se ingresan cada uno de los atributos que tengamos en la base de datos **
-      var auditoria    = new Auditoria()
-      auditoria.name   = data.nombre
-      auditoria.codigo   = codigo // Guardamos el nombre random que generamos
-      auditoria.active = 1
-      yield auditoria.save()
-      // regresamos un estatus 200, lo que nos indica que todo se ha completado
-      // de manera exitos (Puede ser cualquier estatus que se desee, siempre
-      // y cuando sepamos que significa para nosotros, "Yo utilizo estos por
-      // estandar universal"), y ademas enviamos la información de la empresa que
-      // acabamos de registrar.
-      return res.send({
-        status  : 200,
-        data    : auditoria
-      })
-    }
-  }
-
-  * getAllAuditoria (req, res){
-    // Hacemos la consulta de todas las auditorias que se encuentren activas
-    const auditoria = yield Database.from('audits').where('active', 1)
-    return res.send(auditoria)
-  }
-
-  * update (req, res){
-    // Obteneos todos los datos que enviamos en el AJAX
-    const data = req.all()
-  
-    // Revisamos si existe ya una epresa con el folio que estamos enviando
-    const query = yield Database.from('audits').where({'name': data.nombre})
-    // En caso de que la empresa exista, regresamos un estatus que nos indique
-    // que ya existe y obvio ya no se registra esta empresa
-    // EN ESTE CASO VAMOS A COMPARAR QUE EL FOLIO SEA DIFERENTE AL QUE YA TIENE
-    // LA EMPRESA QUE VAMOS A ACTUALIZAR
-    const toUpdate = yield Database.from('audits').where({'id': data.id})
-    if (query.length > 0 && data.nombre != toUpdate[0].nombre){
-      return res.send({
-        'status':1001
-      })
-    }
-    else{
-      // Llegamos a esta parte en caso de que la empresa no exista según el
-      // folio que se ha ingresado
-
-      // Generaos un nombre random para la imagen y le concatenamos
-      // la extension del archivo al final
-      const timestamp = new Date();
-      const codigo = Math.floor((Math.random() * 999999999999999999) + 1) + timestamp.getTime()
-     
-      yield Auditoria.query()
-      .where('id', data.id)
+      // Usando el Modelo, hacemos una condicion de actualizacion, donde indicamos
+      // que se actualizará por ID y cuales serán los valores
+      yield Deparment.query()
+      .where('business_id', data.id)
       .update({
-        name  : data.nombre
+        name  : data.name,
+        userid: data.username
       })
       // regresamos un estatus 200, lo que nos indica que todo se ha completado
       // de manera exitos (Puede ser cualquier estatus que se desee, siempre
@@ -100,13 +80,12 @@ class auditoriaController {
       return res.send({ status  : 200 })
     }
   }
-
   * inactive (req, res){
     // Obteneos todos los datos que enviamos en el AJAX
     const data = req.all()
     // No se debe eliminar "NUNCA" ningun registro de la base de datos, esto se
     // hace por seguridad, unicamente se deberá de cambiar el estatus
-    yield Auditoria.query()
+    yield Department.query()
     .where('id', data.id)
     .update({ active  : 0 })
     // regresamos un estatus 200, lo que nos indica que todo se ha completado
@@ -115,7 +94,5 @@ class auditoriaController {
     // estandar universal").
     return res.send({ status  : 200 })
   }
-
 }
-
-module.exports = auditoriaController
+module.exports = departmentController

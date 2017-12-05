@@ -78,11 +78,13 @@ class DepartmentController {
     else{
       // Usando el Modelo, hacemos una condicion de actualizacion, donde indicamos
       // que se actualizará por ID y cuales serán los valores
-      yield Deparment.query()
-      .where('business_id', data.id)
+      yield Department.query()
+      .where('id', data.id)
       .update({
-        name  : data.name,
-        userid: data.username
+        name  : data.nombre,
+        user_id: data.username,
+        description: data.description,
+        aka: data.aka,
       })
       // regresamos un estatus 200, lo que nos indica que todo se ha completado
       // de manera exitos (Puede ser cualquier estatus que se desee, siempre

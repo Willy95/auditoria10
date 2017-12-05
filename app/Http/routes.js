@@ -43,8 +43,8 @@ Route.post('/inactivebusiness', 'BusinessController.inactive')
 Route.post('/updateAuditor', 'AuditorController.update')
 Route.post('/getAllAuditor', 'AuditorController.getAllAuditor')
 Route.post('/inactiveAuditor', 'AuditorController.inactive')
-Route.post('/savedepartamento', 'DepartmentController.save')
-Route.post('/getAllDepartment', 'DepartmentController.getAllDepartment')
+Route.post('/saveAuditor', 'AuditorController.save')
+
 
 // Rutas Auditoria 
 Route.post('/saveauditoria', 'auditoriaController.save')
@@ -52,3 +52,8 @@ Route.post('/getAllAuditoria', 'auditoriaController.getAllAuditoria')
 Route.post('/updateaudits', 'auditoriaController.update')
 Route.post('/inactiveaudits', 'auditoriaController.inactive')
 
+//Rutas Departamento
+Route.post('/savedepartments', 'DepartmentController.save')
+Route.post('/getAllDepartments', 'DepartmentController.getAllDepartment')
+Route.post('/updatedepartments', 'DepartmentController.update')
+Route.post('/inactivedepartments', 'DepartmentController.inactive')

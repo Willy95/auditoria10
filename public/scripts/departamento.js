@@ -39,7 +39,7 @@ $("#save").click(function(e){
       // AGREGAM0OS AL MOMENTO DE DAR CLICK EN EL BOTON DE ACTUALIZAR **
       values.id = $btn.data('departments');
       $.ajax({
-          url: '/updatedepartamento',
+          url: '/updatedepartments',
           type: 'POST',
           data: values
         })
@@ -74,7 +74,7 @@ $("#save").click(function(e){
       // Verificamos que exista una imagen ya que es registro y ésta es
       // necesaria para completar el registro
       $.ajax({
-          url: '/savedepartamento',
+          url: '/savedepartments',
           type: 'POST',
           data: values
         })
@@ -117,7 +117,7 @@ $("#save").click(function(e){
 // ya tenemos registradas
 function consultingData(){
   $.ajax({
-    url: '/getAllDepartment', // No olvidar crear la ruta en ROUTES.JS
+    url: '/getAllDepartments', // No olvidar crear la ruta en ROUTES.JS
     type: 'POST',
     data: {id: $('#save').data('business')}
     })
@@ -156,9 +156,9 @@ $("body").on('click', '.btnUpd', function(event) {
   var obj = $(this).data('obj');
   $("#sectionTable").fadeOut('slow', function(){
     // Insertamos la información en los inputs
-    $("#business").val(obj.name);
-
-
+    $("#departamento").val(obj.name);
+    $("#aka").val(obj.aka);
+    $("#descripcion").val(obj.description);
     // Le asignamos un atributo al boton guardar para que nos haga la funcionalidad
     // de guardar, y poder reutilizarlo
     $("#save").data('accion', 'actualizar');
@@ -182,7 +182,7 @@ $("body").on('click', '.btnDel', function(event) {
   // ** SE DEBE DE PREGUNTAR SI ESTA SEGURO DE Eliminar
   //    PERO POR LAS PRISAS LO HAREMOS DE MANERA DIRECTA **
   $.ajax({
-    url: '/inactivedepartamento',
+    url: '/inactivedepartments',
     type: 'POST',
     data: { id : obj.id }
   })

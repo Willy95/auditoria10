@@ -2,14 +2,14 @@
 
 function getValues(){
   // Obtenemos los tres valores que nos importan
-  const nombre  = $("#business").val();
+  const nombre  = $("#pregunta").val();
   var datos ={
     id: '',
     nombre:nombre
   }
+
   return datos;
 }
-
 
 // Se le agregan un par de atributos para que la peticion al servidor
 // Pueda procesar los Archivos de manera correcta
@@ -31,9 +31,9 @@ $("#save").click(function(e){
       // empresa que deseamos actualizar
       // ** EL ID LO TENEMOS EN EL ATRIBUTO DATA LLAMADO "business" QUE
       // AGREGAM0OS AL MOMENTO DE DAR CLICK EN EL BOTON DE ACTUALIZAR **
-      values.id = $btn.data('audits');
+      values.id = $btn.data('questions');
       $.ajax({
-          url: '/updateaudits',
+          url: '/updatecuestionario',
           type: 'POST',
           data: values
         })
@@ -67,7 +67,7 @@ $("#save").click(function(e){
       // Verificamos que exista una imagen ya que es registro y ésta es
       // necesaria para completar el registro
       $.ajax({
-          url: '/saveauditoria',
+          url: '/savecuestionario',
           type: 'POST',
           data: values
         })
@@ -110,16 +110,15 @@ $("#save").click(function(e){
 // ya tenemos registradas
 function consultingData(){
   $.ajax({
-    url: '/getAllAuditoria', // No olvidar crear la ruta en ROUTES.JS
+    url: '/getAllCuestionario', // No olvidar crear la ruta en ROUTES.JS
     type: 'POST'
   })
   .done(function(res) {
     // Recorremos la respuesta, y por cada elemto, lo agregamos a la tabla
     $.each(res, function(index, el) {
-      $("#empresasTable tbody").append(`
+      $("#cuestionarioTable tbody").append(`
         <tr>
-          <td>${el.name}</td>
-          <td>${el.codigo}</td>
+          <td>${el.pregunta}</td>
           <td>
             <button type="button" class="btn btn-primary btnUpd" data-obj='${JSON.stringify(el)}'>Actualizar</button>
             <button type="button" class="btn btn-danger btnDel" data-obj='${JSON.stringify(el)}'>Eliminar</button>

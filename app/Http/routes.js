@@ -24,6 +24,7 @@ Route.on('/empresas').render('empresas')
 Route.on('/auditor').render('auditor')
 Route.on('/auditoria').render('auditoria')
 Route.on('/departamento').render('departamento')
+Route.on('/cuestionario').render('cuestionario')
 
 //Route.on('/dashboard').render('templates.opciones') ejercico de ruta
 
@@ -31,6 +32,7 @@ Route.post('/login', 'LoginController.login')
 Route.get('/logout', 'LoginController.logout')
 Route.post('/reg', 'LoginController.reg')
 Route.get('/department/:id', 'DepartmentController.renderView')
+Route.on('/cuestionario/:id').render('cuestionario')
 
 // Rutas especificas para la gestion de las empresas
 Route.post('/savebusiness', 'BusinessController.save')
@@ -57,3 +59,9 @@ Route.post('/savedepartments', 'DepartmentController.save')
 Route.post('/getAllDepartments', 'DepartmentController.getAllDepartment')
 Route.post('/updatedepartments', 'DepartmentController.update')
 Route.post('/inactivedepartments', 'DepartmentController.inactive')
+
+//Rutas Cuestionario
+Route.post('/savecuestionario', 'CuestionarioController.save')
+Route.post('/getAllCuestionario', 'CuestionarioController.getAllCuestionario')
+Route.post('/updatecuestionario', 'CuestionarioController.update')
+Route.post('/inactivecuestionario', 'CuestionarioController.inactive')

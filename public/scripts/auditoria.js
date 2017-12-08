@@ -2,7 +2,7 @@
 
 function getValues(){
   // Obtenemos los tres valores que nos importan
-  const nombre  = $("#business").val();
+  const nombre  = $("#auditoria").val();
   var datos ={
     id: '',
     nombre:nombre
@@ -28,7 +28,7 @@ $("#save").click(function(e){
       // =========
       // A los valores que ya tenemos capturados, le agregamos el id de la
       // empresa que deseamos actualizar
-      // ** EL ID LO TENEMOS EN EL ATRIBUTO DATA LLAMADO "business" QUE
+      // ** EL ID LO TENEMOS EN EL ATRIBUTO DATA LLAMADO "auditoria" QUE
       // AGREGAM0OS AL MOMENTO DE DAR CLICK EN EL BOTON DE ACTUALIZAR **
       values.id = $btn.data('audits');
       $.ajax({
@@ -145,7 +145,7 @@ $("body").on('click', '.btnUpd', function(event) {
   var obj = $(this).data('obj');
   $("#sectionTable").fadeOut('slow', function(){
     // Insertamos la información en los inputs
-    $("#business").val(obj.name);
+    $("#auditoria").val(obj.name);
     
    
     // Le asignamos un atributo al boton guardar para que nos haga la funcionalidad

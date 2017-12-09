@@ -2,14 +2,17 @@
 
 function getValues(){
   // Obtenemos los tres valores que nos importan
-  const nombre  = $("#business").val();
+  const audits  = $("#auditoria").val();
+  const company  = $("#company").val();
+  const department  = $("#departamento").val();
   var datos ={
     id: '',
-    nombre:nombre
+    business_id: company,
+    audit_id: audits,
+    department_id: department,
   }
   return datos;
 }
-
 
 // Se le agregan un par de atributos para que la peticion al servidor
 // Pueda procesar los Archivos de manera correcta
@@ -31,19 +34,19 @@ $("#save").click(function(e){
       // empresa que deseamos actualizar
       // ** EL ID LO TENEMOS EN EL ATRIBUTO DATA LLAMADO "business" QUE
       // AGREGAM0OS AL MOMENTO DE DAR CLICK EN EL BOTON DE ACTUALIZAR **
-      values.id = $btn.data('audits');
+      values.id = $btn.data('departments');
       $.ajax({
-          url: '/updateaudits',
+          url: '/updatedepartments',
           type: 'POST',
           data: values
         })
         .done(function(res){
           if (res.status == 200){
-            alert("Empresa actualizada correctamente");
+            alert("Relacion actualizada correctamente");
             window.location.reload();
           }
           else if (res.status == 1001) {
-            alert('Ya existe una Auditoria registrada con el mismo nombre');
+            alert('Ya existe una Relacion registrado con los mismos datos');
           }
           else {
             alert("Algo ha salido mal");
@@ -67,17 +70,17 @@ $("#save").click(function(e){
       // Verificamos que exista una imagen ya que es registro y ésta es
       // necesaria para completar el registro
       $.ajax({
-          url: '/saveauditoria',
+          url: '/save',
           type: 'POST',
           data: values
         })
         .done(function(res){
           if (res.status == 200){
-            alert("Auditoria registrada correctamente");
+            alert("Relacion actualizada correctamente");
             window.location.reload();
           }
           else if (res.status == 1001) {
-            alert('Ya existe una Auditoria registrada con el mismo nombre');
+            alert('Ya existe una Relacion registrado con los mismos datos');
           }
           else {
             alert("Algo ha salido mal");
@@ -110,38 +113,33 @@ $("#save").click(function(e){
 // ya tenemos registradas
 function consultingData(){
   $.ajax({
-    url: '/getAllAuditoria', // No olvidar crear la ruta en ROUTES.JS
-    type: 'POST'
-  })
+    url: '/getAllRelation', // No olvidar crear la ruta en ROUTES.JS
+    type: 'POST',
+    data: {id: $('#save').data('business')}
+    })
   .done(function(res) {
     // Recorremos la respuesta, y por cada elemto, lo agregamos a la tabla
     $.each(res, function(index, el) {
-      $("#empresasTable tbody").append(`
+      console.log(el);
+      $("#relacionTable tbody").append(`
         <tr>
-          <td>${el.name}</td>
-          <td>${el.codigo}</td>
+          <td>${el.business} | ${el.department} | ${el.audit}</td>
           <td>
             <button type="button" class="btn btn-primary btnUpd" data-obj='${JSON.stringify(el)}'>Actualizar</button>
             <button type="button" class="btn btn-danger btnDel" data-obj='${JSON.stringify(el)}'>Eliminar</button>
-            <button type="button" class="btn btn-success btnagregar" data-obj='${JSON.stringify(el)}'>Cuestionario</button>
           </td>
         </tr>
       `);
     });
     // Inicializamos la tabla ya con los valores agregados
-    $('#empresasTable').bootstrapTable();
+    $('#relacionTable').bootstrapTable();
   })
   .fail(function(err) {
     alert("Algo ha salido mal al obtener la Auditoria");
     console.log(err);
   });
 }
-$("body").on('click', '.btnagregar', function(event) {
-  // Obtenemos la información de la empresa ya que se la asignamos al boton
-  // al momento de llenar la tabla
-  var obj = $(this).data('obj');
-  window.location.href="/cuestionario/"+ obj.id;
-});
+
 // =====================================================
 
 // Click para mostrar la informacion de la empresa a actualizar
@@ -152,15 +150,15 @@ $("body").on('click', '.btnUpd', function(event) {
   var obj = $(this).data('obj');
   $("#sectionTable").fadeOut('slow', function(){
     // Insertamos la información en los inputs
-    $("#business").val(obj.name);
-    
-   
+    $("#departamento").val(obj.name);
+    $("#aka").val(obj.aka);
+    $("#descripcion").val(obj.description);
     // Le asignamos un atributo al boton guardar para que nos haga la funcionalidad
     // de guardar, y poder reutilizarlo
     $("#save").data('accion', 'actualizar');
     // Guardamos en un atributo, el id de la empresa para saber cual es la
     // que vamos a actualizar
-    $("#save").data('audits', obj.id);
+    $("#save").data('departments', obj.id);
     $("#sectionData").fadeIn('slow');
   });
 });
@@ -178,13 +176,13 @@ $("body").on('click', '.btnDel', function(event) {
   // ** SE DEBE DE PREGUNTAR SI ESTA SEGURO DE Eliminar
   //    PERO POR LAS PRISAS LO HAREMOS DE MANERA DIRECTA **
   $.ajax({
-    url: '/inactiveaudits',
+    url: '/inactiveRelation',
     type: 'POST',
     data: { id : obj.id }
   })
   .done(function(res){
     if (res.status == 200){
-      alert("Auditoria eliminada correctamente");
+      alert("Relacion eliminada correctamente");
       window.location.reload();
     }
     else {
@@ -201,7 +199,7 @@ $("body").on('click', '.btnDel', function(event) {
     $btn.prop('disabled', false);
   });
 });
-  
+
 
 // =================================================
 // _TODO LO QUE SE EJECUTE A PARTIR DE AQUI SE REALIZARÁ DESPUES
@@ -230,6 +228,24 @@ $(function(){
 
   // Obtenemos las empresas
   consultingData();
+  $("#company").on('change', function (e){
+    $.ajax({
+    url: '/getCompany', // No olvidar crear la ruta en ROUTES.JS
+    type: 'POST',
+    data: {id: $(this).val()}
+    })
+  .done(function(res) {
+    $('#departamento').html('');
+    $.each(res.data, function(index, element){
+      var codigo = `<option value="${element.id}">${element.name}</option>`;
+      $('#departamento').append(codigo);
 
-
+    })
+  })
+  .fail(function(err) {
+    alert("Algo ha salido mal al obtener la Auditoria");
+    console.log(err);
+  });
+  })
+$("#company").trigger('change');
 });

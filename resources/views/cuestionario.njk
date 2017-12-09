@@ -23,7 +23,8 @@
       <table id="cuestionarioTable" class="table table-responsive table-stripped table-hovered">
         <thead>
           <tr>
-            <th>Pregunta</th>            
+            <th>Pregunta</th>
+            <th>Acciones</th>           
           </tr>
         </thead>
         <tbody></tbody>
@@ -54,7 +55,7 @@
   </div>
   <div class="col-md-6"></div>
   <div class="col-md-3"> <button class="btn-default btn btn-block" id="btnCancel">Cancelar</button></div>
-  <div class="col-md-3"><button class="btn-primary btn btn-block" id="save">Guardar Información</button></div>
+  <div class="col-md-3"><button class="btn-primary btn btn-block" id="save" data-audit="{{audit}}">Guardar Información</button></div>
 </div>
 {% endblock %}
 

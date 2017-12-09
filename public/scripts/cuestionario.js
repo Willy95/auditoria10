@@ -5,7 +5,8 @@ function getValues(){
   const nombre  = $("#pregunta").val();
   var datos ={
     id: '',
-    nombre:nombre
+    question:nombre,
+    audit: ''
   }
 
   return datos;
@@ -39,7 +40,7 @@ $("#save").click(function(e){
         })
         .done(function(res){
           if (res.status == 200){
-            alert("Empresa actualizada correctamente");
+            alert("Pregunta actualizada correctamente");
             window.location.reload();
           }
           else if (res.status == 1001) {
@@ -66,26 +67,28 @@ $("#save").click(function(e){
     if (values != null){
       // Verificamos que exista una imagen ya que es registro y ésta es
       // necesaria para completar el registro
+      values.audit = $btn.data('audit');
       $.ajax({
           url: '/savecuestionario',
           type: 'POST',
-          data: values
+          data: values,
+
         })
         .done(function(res){
           if (res.status == 200){
-            alert("Auditoria registrada correctamente");
+            alert("Pregunta registrada correctamente");
             window.location.reload();
           }
           else if (res.status == 1001) {
-            alert('Ya existe una Auditoria registrada con el mismo nombre');
+            alert('Ya existe una Pregunta registrada con el mismo nombre');
           }
           else {
-            alert("Algo ha salido mal");
+            alert("Algo ha salido mal Perro1");
             console.log(res);
           }
         })
         .fail(function(err){
-          alert("Algo ha salido mal");
+          alert("Algo ha salido mal Perro2");
           console.log("Error", err);
         })
         .always(function(){
@@ -118,20 +121,19 @@ function consultingData(){
     $.each(res, function(index, el) {
       $("#cuestionarioTable tbody").append(`
         <tr>
-          <td>${el.pregunta}</td>
+          <td>${el.question}</td>
           <td>
             <button type="button" class="btn btn-primary btnUpd" data-obj='${JSON.stringify(el)}'>Actualizar</button>
             <button type="button" class="btn btn-danger btnDel" data-obj='${JSON.stringify(el)}'>Eliminar</button>
-            <button type="button" class="btn btn-danger btnagregar" data-obj='${JSON.stringify(el)}'>Cuestionario</button>
           </td>
         </tr>
       `);
     });
     // Inicializamos la tabla ya con los valores agregados
-    $('#empresasTable').bootstrapTable();
+    $('#cuestionarioTable').bootstrapTable();
   })
   .fail(function(err) {
-    alert("Algo ha salido mal al obtener la Auditoria");
+    alert("Algo ha salido mal al obtener la Pregunta");
     console.log(err);
   });
 }
@@ -151,15 +153,13 @@ $("body").on('click', '.btnUpd', function(event) {
   var obj = $(this).data('obj');
   $("#sectionTable").fadeOut('slow', function(){
     // Insertamos la información en los inputs
-    $("#business").val(obj.name);
-    
-   
+    $("#pregunta").val(obj.question);
     // Le asignamos un atributo al boton guardar para que nos haga la funcionalidad
     // de guardar, y poder reutilizarlo
     $("#save").data('accion', 'actualizar');
     // Guardamos en un atributo, el id de la empresa para saber cual es la
     // que vamos a actualizar
-    $("#save").data('audits', obj.id);
+    $("#save").data('questions', obj.id);
     $("#sectionData").fadeIn('slow');
   });
 });
@@ -177,13 +177,13 @@ $("body").on('click', '.btnDel', function(event) {
   // ** SE DEBE DE PREGUNTAR SI ESTA SEGURO DE Eliminar
   //    PERO POR LAS PRISAS LO HAREMOS DE MANERA DIRECTA **
   $.ajax({
-    url: '/inactiveaudits',
+    url: '/inactivecuestionario',
     type: 'POST',
     data: { id : obj.id }
   })
   .done(function(res){
     if (res.status == 200){
-      alert("Auditoria eliminada correctamente");
+      alert("Pregunta eliminada correctamente");
       window.location.reload();
     }
     else {

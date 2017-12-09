@@ -12,30 +12,21 @@ const Helpers = use('Helpers')
 
 class CuestionarioController {
 
-	 * save (req, res){
-    // Obteneos todos los datos que enviamos en el AJAX
-    var data = req.all()
-    // Revisamos si existe ya una epresa con el folio que estamos enviando
-    var query = yield Database.from('questions').where({'question':data.pregunta})
-    // En caso de que la empresa exista, regresamos un estatus que nos indique
-    // que ya existe y obvio ya no se registra esta empresa
-    if (query.length > 0){
-      return res.send({
-        'status':1001
-      })
-    }
-    else{
-      // Llegamos a esta parte en caso de que la empresa no exista según el
-      // folio que se ha ingresado
+  * renderView(req, res){
+    const id = req.param('id')
+    return yield res.sendView('cuestionario', { audit: id })
 
-      
-  
+  }
+
+	 * save (req, res){
+      var data = req.all()
       // Generamos una INSTANCIA de Company para crear una nueva Bussines en
       // la base de datos. COMPANY SE DECLARA EN LA PARTE DE ARRIBA DE
       // ESTE ARCHIVO
       // ** Se ingresan cada uno de los atributos que tengamos en la base de datos **
-      var cuestionario    = new Cuestionario()
-      cuestionario.question   = data.pregunta
+      var cuestionario = new Cuestionario()
+      cuestionario.question = data.question
+      cuestionario.audit_id = data.audit
       cuestionario.active = 1
       yield cuestionario.save()
       // regresamos un estatus 200, lo que nos indica que todo se ha completado
@@ -44,10 +35,9 @@ class CuestionarioController {
       // estandar universal"), y ademas enviamos la información de la empresa que
       // acabamos de registrar.
       return res.send({
-        status  : 200,
-        data    : cuestionario
+        status: 200,
+        data: cuestionario
       })
-    }
   }	
 
  * getAllCuestionario (req, res){
@@ -61,13 +51,13 @@ class CuestionarioController {
     
     const data = req.all()  
     // Revisamos si existe ya una epresa con el folio que estamos enviando
-    const query = yield Database.from('questions').where({'question': data.pregunta})
+    const query = yield Database.from('questions').where({'question': data.question})
     // En caso de que la empresa exista, regresamos un estatus que nos indique
     // que ya existe y obvio ya no se registra esta empresa
     // EN ESTE CASO VAMOS A COMPARAR QUE EL FOLIO SEA DIFERENTE AL QUE YA TIENE
     // LA EMPRESA QUE VAMOS A ACTUALIZAR
-    const toUpdate = yield Database.from('questions').where({'id': data.id})
-    if (query.length > 0 && data.pregunta != toUpdate[0].pregunta){
+    const toUpdate = yield Database.from('questions').where({'question': data.question})
+    if (query.length > 0 && data.question != toUpdate[0].question){
       return res.send({
         'status':1001
       })
@@ -82,7 +72,7 @@ class CuestionarioController {
       yield Cuestionario.query()
       .where('id', data.id)
       .update({
-        questions  : data.pregunta
+        question : data.question
       })
       // regresamos un estatus 200, lo que nos indica que todo se ha completado
       // de manera exitos (Puede ser cualquier estatus que se desee, siempre

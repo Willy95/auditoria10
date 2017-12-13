@@ -1,0 +1,119 @@
+{% extends "templates.dashboard" %}
+
+{% block css %}
+<link rel="stylesheet" href="/libs/bootstrap-table/bootstrap-table.min.css">
+  <style media="screen">
+    #btnFile{
+      cursor: pointer;
+    }
+    .form-horizontal
+    {
+      padding-left: 2rem; 
+    }
+  </style>
+{% endblock %}
+
+{% block title %}
+  Formulario de Preguntas
+{% endblock %}
+
+{% block content %}
+<div class="row" id="sectionTable">
+  <div class="col-xs-12">
+    <div class="">
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Cuestionario</legend>
+
+<!-- Multiple Radios -->
+<div class="control-group">
+  <label class="control-label" for="radiosPreg1">1.- ¿El lugar donde se ubica el centro de computo esta seguro de inundaciones, robo o cualquier otra situacion que pueda poner en peligro los equipos?</label>
+  <div class="controls">
+    <label class="radio" for="radiosPreg1-0">
+      <input type="radio" name="radiosPreg1" id="radiosPreg1-0" value="Sí" checked="checked">
+      Sí
+    </label>
+    <label class="radio" for="radiosPreg1-1">
+      <input type="radio" name="radiosPreg1" id="radiosPreg1-1" value="No">
+      No
+    </label>
+  </div>
+</div>
+
+<!-- Multiple Radios -->
+<div class="control-group">
+  <label class="control-label" for="radiosPreg2">2.- ¿El centro de computo da hacia el exterior?</label>
+  <div class="controls">
+<div class="controls">
+    <label class="radio" for="radiosPreg1-0">
+      <input type="radio" name="radiosPreg1" id="radiosPreg1-0" value="Sí" checked="checked">
+      Sí
+    </label>
+    <label class="radio" for="radiosPreg1-1">
+      <input type="radio" name="radiosPreg1" id="radiosPreg1-1" value="No">
+      No
+    </label>
+  </div>
+  </div>
+</div>
+
+<!-- Multiple Radios -->
+<div class="control-group">
+  <label class="control-label" for="radiosPreg3">3.- ¿Existe lugar suficiente para los equipos?</label>
+  <div class="controls">
+    <label class="radio" for="radiosPreg3-0">
+      <input type="radio" name="radiosPreg3" id="radiosPreg3-0" value="Sí" checked="checked">
+      Sí
+    </label>
+    <label class="radio" for="radiosPreg3-1">
+      <input type="radio" name="radiosPreg3" id="radiosPreg3-1" value="No">
+      No
+    </label>
+  </div>
+</div>
+
+<!-- Multiple Radios -->
+<div class="control-group">
+  <label class="control-label" for="radiosPreg4">4.- ¿Se encuentra con una salida de emergencias?</label>
+  <div class="controls">
+    <label class="radio" for="radiosPreg4-0">
+      <input type="radio" name="radiosPreg4" id="radiosPreg4-0" value="Sí" checked="checked">
+      Sí
+    </label>
+    <label class="radio" for="radiosPreg4-1">
+      <input type="radio" name="radiosPreg4" id="radiosPreg4-1" value="No">
+      No
+    </label>
+  </div>
+</div>
+<div class="control-group">
+  <label class="control-label" for="radiosPreg5">5.- ¿La temperatura en la que trabajan los equipos es la adecuada de acuerdo a las normas bajo las cuales se rige?</label>
+  <div class="controls">
+    <label class="radio" for="radiosPreg5-0">
+      <input type="radio" name="radiosPreg5" id="radiosPreg4-0" value="Sí" checked="checked">
+      Sí
+    </label>
+    <label class="radio" for="radiosPreg5-1">
+      <input type="radio" name="radiosPreg5" id="radiosPreg4-1" value="No">
+      No
+    </label>
+  </div>
+</div>
+<!-- Button -->
+<div class="control-group">
+  <label class="control-label" for="singleEnviar"></label>
+  <div class="controls">
+    <button id="singleEnviar" name="singleEnviar" class="btn btn-success">Enviar</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+{% endblock %}
+{% block js %}
+<script src="/libs/bootstrap-table/bootstrap-table.min.js" charset="utf-8"></script>
+<script src="/libs/bootstrap-table/locale/bootstrap-table-es-MX.js" charset="utf-8"></script>
+<script type="text/javascript" src="/scripts/departamento.js"></script>
+{% endblock %}

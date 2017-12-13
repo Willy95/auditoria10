@@ -127,6 +127,7 @@ function consultingData(){
           <td>
             <button type="button" class="btn btn-primary btnUpd" data-obj='${JSON.stringify(el)}'>Actualizar</button>
             <button type="button" class="btn btn-danger btnDel" data-obj='${JSON.stringify(el)}'>Eliminar</button>
+            <button type="button" class="btn btn-success btnApli" data-obj='${JSON.stringify(el)}'>Aplicar Auditoria</button>
           </td>
         </tr>
       `);
@@ -141,7 +142,12 @@ function consultingData(){
 }
 
 // =====================================================
-
+  $("body").on('click', '.btnApli', function(event) {
+  // Obtenemos la información de la empresa ya que se la asignamos al boton
+  // al momento de llenar la tabla
+  var obj = $(this).data('obj');
+  window.location.href="/encuesta/"+ obj.id;
+});
 // Click para mostrar la informacion de la empresa a actualizar
 // ya que el elemento no existe en nuestro html, accedemos a el de esta manera
 $("body").on('click', '.btnUpd', function(event) {
@@ -225,6 +231,7 @@ $(function(){
       $("#sectionTable").fadeIn('slow');
     });
   });
+
 
   // Obtenemos las empresas
   consultingData();

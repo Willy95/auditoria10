@@ -17,6 +17,9 @@ class CuestionarioController {
     return yield res.sendView('cuestionario', { audit: id })
 
   }
+  *  View(req, res){
+    const id = req.param('id')
+    return yield res.sendView('encuesta')}
 
 	 * save (req, res){
       var data = req.all()
@@ -41,8 +44,9 @@ class CuestionarioController {
   }	
 
  * getAllCuestionario (req, res){
+    const data = req.all()
     // Hacemos la consulta de todas las Cuestionarios que se encuentren activas
-    const pregunta = yield Database.from('questions').where('active', 1)
+    const pregunta = yield Database.from('questions').where({'active':1})
     return res.send(pregunta)
   }
 

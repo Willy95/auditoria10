@@ -34,6 +34,7 @@ Route.post('/reg', 'LoginController.reg')
 Route.get('/department/:id', 'DepartmentController.renderView')
 Route.get('/cuestionario/:id', 'CuestionarioController.renderView')
 Route.get('/relacion/', 'RelacionController.renderView')
+Route.get('/encuesta/:id', 'CuestionarioController.View')
 
 // Rutas empresas
 Route.post('/savebusiness', 'BusinessController.save')

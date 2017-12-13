@@ -24,7 +24,7 @@ class CuestionarioController {
     .innerJoin('questions', 'questions.audit_id', 'audits.id')
     .where({
       'audits_has_departments.active'   : 1,
-      'audits_has_departments.audit_id' : id,
+      'audits_has_departments.id' : id,
       'questions.active'                : 1,
       'audits.active'                   : 1
     })

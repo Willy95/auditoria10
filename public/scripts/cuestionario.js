@@ -114,7 +114,8 @@ $("#save").click(function(e){
 function consultingData(){
   $.ajax({
     url: '/getAllCuestionario', // No olvidar crear la ruta en ROUTES.JS
-    type: 'POST'
+    type: 'POST',
+    data: {id: $("body").find("#save").data("audit")}
   })
   .done(function(res) {
     // Recorremos la respuesta, y por cada elemto, lo agregamos a la tabla
@@ -200,7 +201,7 @@ $("body").on('click', '.btnDel', function(event) {
     $btn.prop('disabled', false);
   });
 });
-  
+
 
 // =================================================
 // _TODO LO QUE SE EJECUTE A PARTIR DE AQUI SE REALIZARÁ DESPUES

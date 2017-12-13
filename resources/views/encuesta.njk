@@ -8,7 +8,7 @@
     }
     .form-horizontal
     {
-      padding-left: 2rem; 
+      padding-left: 2rem;
     }
   </style>
 {% endblock %}
@@ -28,34 +28,38 @@
 <legend>Cuestionario</legend>
 
 <!-- Multiple Radios -->
-<div class="control-group">
-  <label class="control-label" for="radiosPreg1">1.- ¿El lugar donde se ubica el centro de computo esta seguro de inundaciones, robo o cualquier otra situacion que pueda poner en peligro los equipos?</label>
-  <div class="controls">
-    <label class="radio" for="radiosPreg1-0">
-      <input type="radio" name="radiosPreg1" id="radiosPreg1-0" value="Sí" checked="checked">
-      Sí
+{% for item in questions %}
+  <div class="control-group">
+    <label class="control-label" for="radiosPreg1">
+      {{ item.question }}
     </label>
-    <label class="radio" for="radiosPreg1-1">
-      <input type="radio" name="radiosPreg1" id="radiosPreg1-1" value="No">
-      No
-    </label>
+    <div class="controls">
+      <label class="radio" for="radiosPreg1-0">
+        <input type="radio" name="radiosPreg{{item.id}}" value="Sí" checked="checked">
+        Sí
+      </label>
+      <label class="radio" for="radiosPreg1-1">
+        <input type="radio" name="radiosPreg{{item.id}}" value="No">
+        No
+      </label>
+    </div>
   </div>
-</div>
+{% endfor %}
 
-<!-- Multiple Radios -->
+{# <!-- Multiple Radios -->
 <div class="control-group">
   <label class="control-label" for="radiosPreg2">2.- ¿El centro de computo da hacia el exterior?</label>
   <div class="controls">
-<div class="controls">
-    <label class="radio" for="radiosPreg1-0">
-      <input type="radio" name="radiosPreg1" id="radiosPreg1-0" value="Sí" checked="checked">
-      Sí
-    </label>
-    <label class="radio" for="radiosPreg1-1">
-      <input type="radio" name="radiosPreg1" id="radiosPreg1-1" value="No">
-      No
-    </label>
-  </div>
+    <div class="controls">
+      <label class="radio" for="radiosPreg1-0">
+        <input type="radio" name="radiosPreg1" id="radiosPreg1-0" value="Sí" checked="checked">
+        Sí
+      </label>
+      <label class="radio" for="radiosPreg1-1">
+        <input type="radio" name="radiosPreg1" id="radiosPreg1-1" value="No">
+        No
+      </label>
+    </div>
   </div>
 </div>
 
@@ -100,7 +104,7 @@
       No
     </label>
   </div>
-</div>
+</div> #}
 <!-- Button -->
 <div class="control-group">
   <label class="control-label" for="singleEnviar"></label>

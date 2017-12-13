@@ -19,7 +19,17 @@ class CuestionarioController {
   }
   *  View(req, res){
     const id = req.param('id')
-    return yield res.sendView('encuesta')}
+    const response = yield Database.from('audits_has_departments')
+    .innerJoin('audits', 'audits_has_departments.audit_id', 'audits.id')
+    .innerJoin('questions', 'questions.audit_id', 'audits.id')
+    .where({
+      'audits_has_departments.active'   : 1,
+      'audits_has_departments.audit_id' : id,
+      'questions.active'                : 1,
+      'audits.active'                   : 1
+    })
+    .select('questions.*', 'audits_has_departments.business_id', 'audits_has_departments.department_id')
+    return yield res.sendView('encuesta', { questions: response  })}
 
 	 * save (req, res){
       var data = req.all()
@@ -30,7 +40,7 @@ class CuestionarioController {
       var cuestionario = new Cuestionario()
       cuestionario.question = data.question
       cuestionario.audit_id = data.audit
-      cuestionario.active = 1
+      cuestionario.active   = 1
       yield cuestionario.save()
       // regresamos un estatus 200, lo que nos indica que todo se ha completado
       // de manera exitos (Puede ser cualquier estatus que se desee, siempre
@@ -41,19 +51,19 @@ class CuestionarioController {
         status: 200,
         data: cuestionario
       })
-  }	
+  }
 
  * getAllCuestionario (req, res){
     const data = req.all()
     // Hacemos la consulta de todas las Cuestionarios que se encuentren activas
-    const pregunta = yield Database.from('questions').where({'active':1})
+    const pregunta = yield Database.from('questions').where({'active':1, 'audit_id':data.id})
     return res.send(pregunta)
   }
 
  * update (req, res){
     // Obteneos todos los datos que enviamos en el AJAX
-    
-    const data = req.all()  
+
+    const data = req.all()
     // Revisamos si existe ya una epresa con el folio que estamos enviando
     const query = yield Database.from('questions').where({'question': data.question})
     // En caso de que la empresa exista, regresamos un estatus que nos indique
@@ -72,7 +82,7 @@ class CuestionarioController {
 
       // Generaos un pregunta random para la imagen y le concatenamos
       // la extension del archivo al final
-        
+
       yield Cuestionario.query()
       .where('id', data.id)
       .update({

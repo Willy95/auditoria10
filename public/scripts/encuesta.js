@@ -11,7 +11,7 @@ $('#singleEnviar').click(function(e){
     var promedio = (yes * 100) / quest
     $("#result span").text(promedio + '%');
     $("#result").show('slow', function () {
-      var htmlCode = `${$("#pdf").html()}`;
+      var htmlCode = `${$("body").find("#pdf").html()}`;
       $.ajax({
         url: '/makePfd',
         type: 'POST',
@@ -20,7 +20,7 @@ $('#singleEnviar').click(function(e){
       .done(function(res) {
         console.log(res);
         window.open(
-          '/reportes/' + res.data.name,
+          '/reportes/' + res.data,
           '_blank' // <- This is what makes it open in a new window.
         );
         $btn.remove();

@@ -4,6 +4,7 @@ const Database   = use('Database')
 const Helpers    = use('Helpers')
 const viewsPath  = Helpers.viewsPath()
 const pdfView    = Helpers.viewsPath()
+const Relation = use('App/Model/AuditsHasDepartments')s
 
 class PDFController {
 
@@ -28,6 +29,9 @@ class PDFController {
         })
       }
       else {
+        yield Relation.query()
+        .where('id', data.id)
+        .update({ pdf : name })
         return res.send({
           status : 200,
           message: "El reporte se creó exitosamente",

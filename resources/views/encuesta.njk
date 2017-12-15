@@ -28,28 +28,37 @@
 <legend>Cuestionario</legend>
 
 <!-- Multiple Radios -->
-{% for item in questions %}
-  <div class="control-group">
-    <label class="control-label" for="radiosPreg" id="question">
-      {{ item.question }}
-    </label>
-    <div class="controls">
-      <label class="radio" for="radiosPreg1">
-        <input type="radio" name="radiosPreg{{item.id}}" class="yes">
-        Sí
+<div id="pdf">
+  {% for item in questions %}
+    <div class="control-group" style="margin-bottom: 1rem;
+                                      background: #e4e4e4;
+                                      padding: 1rem;
+                                      border-radius: 1rem;" >
+      <label class="control-label" for="radiosPreg" id="question" style="margin-bottom: 1rem;">
+        {{ item.question }}
       </label>
-      <label class="radio" for="radiosPreg0">
-        <input type="radio" name="radiosPreg{{item.id}}" class="no" checked="checked">
-        No
-      </label>
+      <div class="controls" style="margin-left: 2rem;">
+        <label class="radio" for="radiosPreg1">
+          <input type="radio" name="radiosPreg{{item.id}}" class="yes">
+          Sí
+        </label>
+        <label class="radio" for="radiosPreg0">
+          <input type="radio" name="radiosPreg{{item.id}}" class="no" checked="checked">
+          No
+        </label>
+      </div>
     </div>
-  </div>
-{% endfor %}
+  {% endfor %}
+  <h1 id="result" hidden style="font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    float: right;">Promedio de evaluacion: <span>100%</span> </h1>
+</div>
 <!-- Button -->
 <div class="control-group">
   <label class="control-label" for="singleEnviar"></label>
   <div class="controls">
-    <button id="singleEnviar" name="singleEnviar" class="btn btn-success">Enviar</button>
+    <button id="singleEnviar" name="singleEnviar" class="btn btn-success" data-rel="{{relation}}">Enviar</button>
   </div>
 </div>
 

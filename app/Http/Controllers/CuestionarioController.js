@@ -28,7 +28,7 @@ class CuestionarioController {
       'questions.active'                : 1,
       'audits.active'                   : 1
     })
-    .select('questions.*', 'audits_has_departments.business_id', 'audits_has_departments.department_id')
+    .select('questions.*', 'audits_has_departments.business_id', 'audits_has_departments.department_id', 'audits_has_departments.id as relation')
     return yield res.sendView('encuesta', { questions: response  })}
 
 	 * save (req, res){

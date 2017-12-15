@@ -42,13 +42,13 @@ Route.post('/getAllBusiness', 'BusinessController.getAllBusiness')
 Route.post('/updateBusiness', 'BusinessController.update')
 Route.post('/inactivebusiness', 'BusinessController.inactive')
 
-// Rutas Auditor 
+// Rutas Auditor
 Route.post('/updateAuditor', 'AuditorController.update')
 Route.post('/getAllAuditor', 'AuditorController.getAllAuditor')
 Route.post('/inactiveAuditor', 'AuditorController.inactive')
 Route.post('/saveAuditor', 'AuditorController.save')
 
-// Rutas Auditoria 
+// Rutas Auditoria
 Route.post('/saveauditoria', 'auditoriaController.save')
 Route.post('/getAllAuditoria', 'auditoriaController.getAllAuditoria')
 Route.post('/updateaudits', 'auditoriaController.update')
@@ -71,3 +71,5 @@ Route.post('/getCompany', 'RelacionController.getCompany')
 Route.post('/save', 'RelacionController.save')
 Route.post('/getAllRelation', 'RelacionController.getAllRelation')
 Route.post('/inactiveRelation', 'RelacionController.inactive')
+
+Route.post('/makePfd', 'PDFController.make')
